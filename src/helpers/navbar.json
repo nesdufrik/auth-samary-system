@@ -1,0 +1,33 @@
+[
+    {
+        "empleado": [
+            {
+                "title": "Dashboard",
+                "link": "/pos/dashboard",
+                "icon": "dashboard"
+            }
+        ],
+        "usuario": [
+            {
+                "title": "Inicio",
+                "link": "/admin",
+                "icon": "home"
+            },
+            {
+                "title": "Estadísticas",
+                "link": "stats",
+                "icon": "dashboard"
+            },
+            {
+                "title": "Productos",
+                "link": "productos",
+                "icon": "restaurant"
+            },
+            {
+                "title": "Usuarios",
+                "link": "users",
+                "icon": "group"
+            }
+        ]
+    }
+]
