@@ -26,14 +26,14 @@
                 <div
                     class="alert alert-warning"
                     role="alert"
-                    v-show="logInData.show"
+                    v-if="logInData.show"
                 >
                     {{ logInData.message }}
                 </div>
                 <button
                     class="w-100 btn btn-lg btn-primary"
                     type="submit"
-                    v-show="loading"
+                    v-if="!actionState"
                 >
                     Iniciar Sesión
                 </button>
@@ -41,7 +41,7 @@
                     class="w-100 btn btn-lg btn-primary"
                     type="button"
                     disabled
-                    v-show="!loading"
+                    v-else
                 >
                     <span
                         class="spinner-border spinner-border-sm"
@@ -63,7 +63,7 @@
 <script setup>
 import { useAuth } from '../composables/useAuth'
 
-const { logInForm, logInData, loading, login } = useAuth()
+const { logInForm, logInData, actionState, login } = useAuth()
 </script>
 
 <style scoped>

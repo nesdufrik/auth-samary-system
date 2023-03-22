@@ -4,7 +4,6 @@ import axios from 'axios'
 export const useAuthStore = defineStore('auth', {
     state: () => {
         return {
-            islogIn: false,
             logInForm: {
                 email: '',
                 password: '',
@@ -13,7 +12,7 @@ export const useAuthStore = defineStore('auth', {
                 message: '',
                 show: false,
             },
-            loading: true,
+            actionState: false,
             cargando: false,
         }
     },
@@ -21,16 +20,7 @@ export const useAuthStore = defineStore('auth', {
         loginAuth(path) {
             this.islogIn = true
             this.cargando = true
-            this.router.push(`/${path}`)
-        },
-        logoutAuth() {
-            this.islogIn = false
-            this.cargando = false
-            this.logInForm = {
-                username: '',
-                password: '',
-            }
-            window.location.assign('/')
+            this.router.push({ path: 'https://www.google.com' })
         },
         async verifyJwt() {
             this.cargando = false

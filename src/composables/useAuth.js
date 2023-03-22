@@ -1,10 +1,12 @@
 import { storeToRefs } from 'pinia'
+import { useRouter } from 'vue-router'
 import { loginApi } from '../helpers/helpAuth'
 import { useAuthStore } from '../stores/authStore'
 
 export const useAuth = () => {
+    const router = useRouter()
     const authStore = useAuthStore()
-    const { islogIn, logInForm, logInData, loading, cargando } =
+    const { logInForm, logInData, actionState, cargando } =
         storeToRefs(authStore)
 
     const login = async () => {
@@ -14,38 +16,30 @@ export const useAuth = () => {
             logInData.value.show = true
             return
         }
-        loading.value = false
+        actionState.value = true
         await loginApi(logInForm.value).then(res => {
-            loading.value = true
-            if (res.success) {
-                localStorage.setItem('token', res.data.token)
-                localStorage.setItem('name', res.data.name)
-                authStore.loginAuth(res.data.path)
-            } else {
-                logInData.value.message = res.message
+            actionState.value = false
+            console.log(res.success)
+            if (!res.success) {
+                logInData.value.message = res.data.message
                 logInData.value.show = true
+                return
             }
+            window.location.href =
+                'https://admin-frontend-pos.netlify.app/admin'
         })
-    }
-
-    const logout = () => {
-        localStorage.removeItem('name')
-        localStorage.removeItem('token')
-        authStore.logoutAuth()
     }
 
     return {
         //! propiedades
-        islogIn,
         logInForm,
         logInData,
-        loading,
+        actionState,
         cargando,
 
         //! computadas
 
         //! metodos
         login,
-        logout,
     }
 }
